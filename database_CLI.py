@@ -73,12 +73,6 @@ def update_done(index):
 
 def list_records(constraint):
     match constraint:
-        case "all":
-            notes_db_cursor.execute(
-                """
-                select rowid, * from tasks_table 
-                """
-            )
         case "done":
             notes_db_cursor.execute(
                 """
@@ -101,7 +95,11 @@ def list_records(constraint):
                 """
             )
         case _:
-            exit()
+            notes_db_cursor.execute(
+                """
+                select rowid, * from tasks_table 
+                """
+            )
 
     print("| ID \t| TASK \t\t| DONE \t| IN PROGRESS |")
 
